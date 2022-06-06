@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: costumers
+    description: "Costumers table"
+    columns:
+      - name: customer_id
+        description: "The primary key for custumer table"
+        tests:
+          - unique
+          - not_null
+      - name: state
+        tests:
+          - accepted_values:
+              values: ['PR', 'SC', 'RS', 'RJ', 'AL', 'BA', 'SP', 'RO', 'MT', 'GO', 'DF', 'PA']
+
+  - name: stg_orders
+    columns:
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('customers')
+              field: customer_id
